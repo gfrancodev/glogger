@@ -1,0 +1,8 @@
+.idea
+exemplo
+build.sh
+glogger.config
+README.md
+Dockerfile
+Dockerfile.build.linux
+install_deps.sh

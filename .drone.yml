@@ -1,0 +1,35 @@
+kind: pipeline
+name: Publish to PyPI
+
+trigger:
+  event:
+    - push
+  branch:
+    - main
+
+platform:
+  os: linux
+  arch: amd64
+
+steps:
+- name: Check out code
+  image: alpine/git
+  commands:
+    - git clone $DRONE_REPO $DRONE_WORKSPACE
+    - cd $DRONE_WORKSPACE
+
+- name: Set up Python
+  image: python:3.9
+  commands:
+    - pip install setuptools wheel twine
+
+- name: Build and publish
+  image: python:3.9
+  commands:
+    - python setup.py sdist bdist_wheel
+    - twine upload --skip-existing dist/* 
+  environment:
+    TWINE_USERNAME:
+      from_secret: PYPI_USERNAME
+    TWINE_PASSWORD:
+      from_secret: PYPI_API_TOKEN
