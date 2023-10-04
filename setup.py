@@ -5,11 +5,13 @@ import os
 base_dir = os.path.dirname(__file__)
 
 setup(
-    name="glogger",
+    name="gfrancodev-glogger",
     version="0.2",
     description="Log Aggregator",
     author="Gustavo Franco",
     author_email="conctact@gfrancodev.com",
+    long_description=open('README.md').read(),
+    long_description_content_type='text/markdown',
     install_requires=[
         'boto3==1.18.2',
         'configparser==5.0.2',
@@ -33,3 +35,4 @@ setup(
         "License :: OSI Approved :: MIT License",
     ],
 )
+
